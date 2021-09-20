@@ -30,8 +30,8 @@ public class Counter {
 
     static CompletableFuture<Void> runCounting(ExecutorService executorService) {
         return CompletableFuture.runAsync(() -> {
-            synchronized (lock) {
-                for (int i = 0; i < 1000000; i++) {
+            for (int i = 0; i < 1000000; i++) {
+                synchronized (lock) {
                     Counter.counter = Counter.counter + 1;
                 }
             }

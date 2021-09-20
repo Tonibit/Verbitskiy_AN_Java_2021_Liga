@@ -6,11 +6,16 @@ import java.util.concurrent.Executors;
 public class Main {
 
     // Почему при вызове executorService.shutdown(); программа продолжает свое исполнение ?
+    // Ответ: При вызове метода shutdown executorService перестает принимать новые задачи,
+    // но потоки останавливаются тогда, когда выполнится последняя переданная задача в executorService.
     // Почему если убрать строчку 28 (executorService.shutdown()) программа не прекратит свое исполнение
     // даже после завершения всех тасок в executorService ?
+    // Из-за того, что явно не вызываем заверщение executorService, потоки находятся в состоянии running
+    // и JVM не заверщает работу.
     // Почему при работе тасок executorService в консоль в секунду попадает всего 4 сообщения, тогда как тасок в executorService - 16?
+    // Ответ: так как 4 потока задано в executorService.
     public static void main(String[] args) {
-        startSomeDaemon();
+//        startSomeDaemon();
 
         int num = getThreadsCount();
 
@@ -27,7 +32,7 @@ public class Main {
                 System.err.println(String.format("Hello from %d callable", captureId));
             });
         }
-//        executorService.shutdown();
+        executorService.shutdown();
     }
 
     private static int getThreadsCount() {
@@ -52,7 +57,9 @@ public class Main {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
+
             }
+
         });
         thread.setDaemon(true);
         thread.start();
