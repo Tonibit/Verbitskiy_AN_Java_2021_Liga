@@ -6,8 +6,8 @@ import ru.digitalleague.designpatterns.notification.MailNotification;
 import ru.digitalleague.designpatterns.notification.Notification;
 
 public class MailNotificationFactory implements NotificationFactory {
-    public Notification makeNotification(String body, User user) {
-        return new MailNotification(body, user, hasAdv(user));
+    public Notification makeNotification(User user) {
+        return new MailNotification(user, hasAdv(user));
     }
 
     private boolean hasAdv(User user) {

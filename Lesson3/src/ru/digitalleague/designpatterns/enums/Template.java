@@ -1,8 +1,8 @@
 package ru.digitalleague.designpatterns.enums;
 
 public enum Template {
-    MAIL("%s: %s\n%s %s,\n%s%s\n%s"),
-    PHONE("%s #%s\n%s");
+    MAIL("Address: %s\nDear %s,\nGood day!\n\n%s\n\nSincerely, Support team!"),
+    PHONE("Phone #%s\nGood day!");
 
     String message;
 

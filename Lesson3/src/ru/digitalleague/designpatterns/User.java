@@ -39,6 +39,7 @@ public class User {
         this.name = name;
         this.email = email;
         this.phone = phone;
+        this.language = Language.ENGLISH;
     }
 
     public User(Long id, String name, String email, String phone, Language language) {

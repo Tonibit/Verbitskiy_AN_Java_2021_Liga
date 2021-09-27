@@ -1,16 +1,15 @@
 package ru.digitalleague.designpatterns.notification;
 
 
+import ru.digitalleague.designpatterns.TemplateMessage;
 import ru.digitalleague.designpatterns.User;
 
 public class MailNotification implements Notification {
 
-    private String body;
     private User user;
     private boolean hasAdvertisement;
 
-    public MailNotification(String body, User user, boolean hasAdvertisement) {
-        this.body = body;
+    public MailNotification(User user, boolean hasAdvertisement) {
         this.user = user;
         this.hasAdvertisement = hasAdvertisement;
     }
@@ -18,11 +17,10 @@ public class MailNotification implements Notification {
     @Override
     public String getText() {
         return String.format(
-                "Address: %s\nУважаемый %s,\n%s%s\nС уважением, команда поддержки!",
+                TemplateMessage.getMailTemplate(),
                 user.getEmail(),
                 user.getName(),
-                body,
-                hasAdvertisement ? "\n\nПокупайте наши товары!\n" : ""
+                hasAdvertisement ? TemplateMessage.getAdvertisement() : ""
         );
     }
 

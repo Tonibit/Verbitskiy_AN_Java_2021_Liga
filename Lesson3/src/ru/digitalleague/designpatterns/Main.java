@@ -14,17 +14,17 @@ public class Main {
         User user = new User(2L, "Денис", "denis@gmail.com", "+79522668105");
         User user1 = new User(21L, "Leo", "LeoMeihn@yahoo.com", "+34586321156", Language.GERMAN);
 
-        NotificationFactory factory =  new MailNotificationFactory();
+        NotificationFactory factory = new MailNotificationFactory();
         System.out.println("Example with MailNotification(language didn't set)");
-        sendNotification(new NotificationDecorator(factory.makeNotification("Доброго дня!", user)));
+        sendNotification(new NotificationDecorator(factory.makeNotification(user)));
 
         user.setLanguage(Language.JAPANESE);
         System.out.println("\n\nExample with MailNotification(language is set to " + user.getLanguage() + ")");
-        sendNotification(new NotificationDecorator(factory.makeNotification("Доброго дня!", user)));
+        sendNotification(new NotificationDecorator(factory.makeNotification(user)));
 
         factory = new PhoneNotificationFactory();
-        System.out.println("\n\nExample with PhoneNotification(language: "+ user1.getLanguage() + ")");
-        sendNotification(new NotificationDecorator(factory.makeNotification("Доброго дня!", user1)));
+        System.out.println("\n\nExample with PhoneNotification(language: " + user1.getLanguage() + ")");
+        sendNotification(new NotificationDecorator(factory.makeNotification(user1)));
 
     }
 

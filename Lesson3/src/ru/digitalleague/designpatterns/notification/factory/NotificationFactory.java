@@ -5,5 +5,5 @@ import ru.digitalleague.designpatterns.User;
 import ru.digitalleague.designpatterns.notification.Notification;
 
 public interface NotificationFactory {
-    Notification makeNotification(String text, User user);
+    Notification makeNotification(User user);
 }

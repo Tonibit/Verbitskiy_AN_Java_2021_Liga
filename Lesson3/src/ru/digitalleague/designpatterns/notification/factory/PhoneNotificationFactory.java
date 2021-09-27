@@ -6,7 +6,7 @@ import ru.digitalleague.designpatterns.notification.Notification;
 import ru.digitalleague.designpatterns.notification.PhoneNotification;
 
 public class PhoneNotificationFactory implements NotificationFactory {
-    public Notification makeNotification(String body, User user) {
-        return new PhoneNotification(body, user);
+    public Notification makeNotification(User user) {
+        return new PhoneNotification(user);
     }
 }
