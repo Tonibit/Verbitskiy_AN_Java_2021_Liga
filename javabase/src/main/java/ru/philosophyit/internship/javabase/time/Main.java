@@ -29,7 +29,7 @@ public class Main {
         String weekDays = "пн вт ср чт пт сб вс";
 
         //find monday if it is not first date in month
-        while (!weekDayFormatter.format(calendar.getTime()).contains("пн")) {
+        while (calendar.get(Calendar.DAY_OF_WEEK) != Calendar.MONDAY) {
             calendar.add(Calendar.DAY_OF_MONTH, -1);
 //            System.out.println(weekDayFormatter.format(calendar.getTime()) + " "
 //                    + dateOfMonthFormatter.format(calendar.getTime()));
@@ -38,15 +38,15 @@ public class Main {
         //until get reached next month or end of week
         // printing day of the week and date of the month and increase one day
         StringBuilder dateDays = new StringBuilder();
+        System.out.println(weekDays);
         while (calendar.get(Calendar.MONTH) < nextMonth.get(Calendar.MONTH) ||
-                (!weekDayFormatter.format(calendar.getTime()).contains("пн"))) {
+                (calendar.get(Calendar.DAY_OF_WEEK) != Calendar.MONDAY)) {
             if (Integer.parseInt(dateOfMonthFormatter.format(calendar.getTime())) < 10) {
                 dateDays.append(dateOfMonthFormatter.format(calendar.getTime())).append("  ");
             } else {
                 dateDays.append(dateOfMonthFormatter.format(calendar.getTime())).append(" ");
             }
-            if (weekDayFormatter.format(calendar.getTime()).contains("вс")) {
-                System.out.println(weekDays);
+            if (calendar.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY) {
                 System.out.println(dateDays.toString().trim());
                 dateDays.setLength(0);
             }
