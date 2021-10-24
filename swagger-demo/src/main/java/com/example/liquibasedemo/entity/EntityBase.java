@@ -9,10 +9,17 @@ import javax.persistence.MappedSuperclass;
 import java.util.UUID;
 
 @MappedSuperclass
-@Getter
-@Setter
+
 public abstract class EntityBase {
     @Id
     @Column(unique = true, length = 16)
     protected UUID id;
+
+    public UUID getId() {
+        return id;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
+    }
 }

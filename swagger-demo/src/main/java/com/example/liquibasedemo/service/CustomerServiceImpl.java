@@ -36,13 +36,8 @@ public class CustomerServiceImpl implements CustomerService {
 
 
     public CustomerDTO getCustomerById(String id) throws NotFoundException {
-        Optional<Customer> customer = customerRepository
-                .findById(UUID.fromString(id));
-        Customer customerToFind = customer.orElse(null);
-        if (customerToFind == null) {
-            throw new NotFoundException("Couldn't find customer");
-        }
-        return new CustomerDTO(customerToFind.getName());
+        return new CustomerDTO(customerRepository.findById(UUID.fromString(id))
+                .orElseThrow(() -> new NotFoundException("Couldn't find customer")).getName());
     }
 
     public CustomerDTO saveCustomer(Customer customer) {
@@ -51,13 +46,8 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     public void deleteCustomer(String id) throws NotFoundException {
-        Optional<Customer> customer = customerRepository.findById(UUID.fromString(id));
-        Customer customerToDelete = customer.orElse(null);
-        if (customerToDelete != null) {
-            customerRepository.deleteById(UUID.fromString(id));
-        } else {
-            throw new NotFoundException("Couldn't find customer");
-        }
+        customerRepository.deleteById(customerRepository.findById(UUID.fromString(id))
+                .orElseThrow(() -> new NotFoundException("Couldn't find customer")).getId());
 
     }
 
