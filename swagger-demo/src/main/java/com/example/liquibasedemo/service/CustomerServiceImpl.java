@@ -5,12 +5,10 @@ import com.example.liquibasedemo.entity.Customer;
 import com.example.liquibasedemo.persistence.CustomerRepository;
 import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -27,7 +25,6 @@ public class CustomerServiceImpl implements CustomerService {
 
 
     public List<CustomerDTO> getAllCustomers(Pageable pageable) {
-//        Page<Customer> customerPages = customerRepository.findAll(pageable);
         return customerRepository.findAll(pageable).get()
                 .map(customer -> new CustomerDTO(customer.getName()))
                 .collect(Collectors.toList());
